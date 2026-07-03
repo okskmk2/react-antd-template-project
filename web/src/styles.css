@@ -1,0 +1,23 @@
+:root {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+.page-layout {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: linear-gradient(120deg, #f5f7fa 0%, #e4ecfb 100%);
+}
+
+.content-card {
+  width: 100%;
+  max-width: 680px;
+}

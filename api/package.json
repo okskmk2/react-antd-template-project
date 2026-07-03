@@ -1,0 +1,16 @@
+{
+  "type": "module",
+  "scripts": {
+    "start": "node ./src/main.mjs",
+    "stop": "kill-port 3000",
+    "restart": "pnpm run stop && pnpm run start",
+    "start:clean": "pnpm run stop && pnpm run start"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "kill-port": "^2.0.1"
+  }
+}
