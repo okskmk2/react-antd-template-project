@@ -6,11 +6,11 @@ type MenuItem = Required<MenuProps>["items"][number];
 const items: MenuItem[] = [
   {
     key: "test",
-    label: "Test",
+    label: "통계",
     children: [
       {
-        key: "prototype-list-page",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
+        key: "statistics-page",
+        label: <Link to={"/statistics-page"}>통계</Link>,
       },
     ],
   },

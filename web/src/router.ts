@@ -9,6 +9,7 @@ import GatewayErrorPage from "./pages/error/GatewayErrorPage";
 import ServiceUnavailablePage from "./pages/error/ServiceUnavailablePage";
 import PrototypeListPage from "./pages/PrototypeListPage";
 import PrototypeDetailPage from "./pages/PrototypeDetailPage";
+import StatisticsPage from "./pages/StatisticsPage";
 
 const routes: RouteObject[] = [
   {
@@ -28,34 +29,38 @@ const routes: RouteObject[] = [
         Component: PrototypeDetailPage,
       },
       {
-        path: "/error/unauthorized",
-        Component: UnauthorizedPage,
-      },
-      {
-        path: "/error/forbidden",
-        Component: ForbiddenPage,
-      },
-      {
-        path: "/error/not-found",
-        Component: NotFoundPage,
-      },
-      {
-        path: "/error/server-error",
-        Component: ServerErrorPage,
-      },
-      {
-        path: "/error/bad-gateway",
-        Component: GatewayErrorPage,
-      },
-      {
-        path: "/error/service-unavailable",
-        Component: ServiceUnavailablePage,
-      },
-      {
-        path: "*",
-        Component: NotFoundPage,
+        path: "/statistics-page",
+        Component: StatisticsPage,
       },
     ],
+  },
+  {
+    path: "/error/unauthorized",
+    Component: UnauthorizedPage,
+  },
+  {
+    path: "/error/forbidden",
+    Component: ForbiddenPage,
+  },
+  {
+    path: "/error/not-found",
+    Component: NotFoundPage,
+  },
+  {
+    path: "/error/server-error",
+    Component: ServerErrorPage,
+  },
+  {
+    path: "/error/bad-gateway",
+    Component: GatewayErrorPage,
+  },
+  {
+    path: "/error/service-unavailable",
+    Component: ServiceUnavailablePage,
+  },
+  {
+    path: "*",
+    Component: NotFoundPage,
   },
 ];
 

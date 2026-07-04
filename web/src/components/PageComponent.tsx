@@ -12,7 +12,7 @@ export default function PageComponent({
   return (
     <div className="PageComponent">
       <div className="PageHeader">
-        <div>{title}</div>
+        <div className="PageTitle">{title}</div>
         <div>{actions}</div>
       </div>
       <div className="PageContent scrollbar">{children}</div>
