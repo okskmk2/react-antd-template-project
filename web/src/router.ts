@@ -7,6 +7,8 @@ import NotFoundPage from "./pages/error/NotFoundPage";
 import ServerErrorPage from "./pages/error/ServerErrorPage";
 import GatewayErrorPage from "./pages/error/GatewayErrorPage";
 import ServiceUnavailablePage from "./pages/error/ServiceUnavailablePage";
+import PrototypeListPage from "./pages/PrototypeListPage";
+import PrototypeDetailPage from "./pages/PrototypeDetailPage";
 
 const routes: RouteObject[] = [
   {
@@ -16,6 +18,14 @@ const routes: RouteObject[] = [
       {
         index: true,
         Component: HomePage,
+      },
+      {
+        path: "/prototype-list-page",
+        Component: PrototypeListPage,
+      },
+      {
+        path: "/prototype-detail-page",
+        Component: PrototypeDetailPage,
       },
       {
         path: "/error/unauthorized",

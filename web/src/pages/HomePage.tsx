@@ -1,9 +1,10 @@
-import { Layout, Typography } from "antd";
-
 export default function HomePage() {
   return (
-    <Layout.Content>
-      <Typography.Title level={2}>Home Page</Typography.Title>
-    </Layout.Content>
+    <div>
+      <div className="CommonHeader">Home Page</div>
+      <div>
+        <div style={{ height: 2000, backgroundColor: "gray" }}></div>
+      </div>
+    </div>
   );
 }

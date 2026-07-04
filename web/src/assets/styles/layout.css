@@ -1,0 +1,62 @@
+.Snb {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  border-right: var(--layout-border);
+  width: 270px;
+  flex-shrink: 0;
+}
+
+.SnbMenu {
+  flex-grow: 1;
+}
+
+.DefaultLayout {
+  display: flex;
+  height: 100vh;
+}
+
+.PageComponent {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.PageHeader {
+  /* height: 70px; */
+  border-bottom: var(--layout-border);
+  padding: 16px var(--app-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.PageContent {
+  padding: var(--app-padding);
+}
+
+.SnbHeader {
+  padding: var(--app-padding);
+}
+
+.SnbFooter {
+  padding: var(--app-padding);
+}
+
+.DetailColumns {
+  display: flex;
+  gap: 24px;
+}
+
+.DetailColumns > div {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.DetailColumns > div:first-child {
+  flex-grow: 1;
+}
+.DetailColumns > div:last-child {
+  flex-basis: 30%;
+}
