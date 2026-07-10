@@ -1,0 +1,18 @@
+.CardComponent {
+  background-color: white;
+  border-radius: 12px;
+  border: 1px solid #e5e5e5;
+  box-shadow: 1px 1px 3px 2px #eee;
+}
+.CardComponent__head {
+  display: flex;
+  justify-content: space-between;
+  padding: 24px 32px;
+}
+.CardComponent__title {
+  font-weight: 600;
+  font-size: 15px;
+}
+.CardComponent__body {
+  padding: 8px 32px 36px;
+}

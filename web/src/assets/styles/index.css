@@ -1,3 +1,6 @@
 @import url(./variables.css);
 @import url(./layout.css);
 @import url(./utils.css);
+@import url(./antd.css);
+
+@import url(./components/index.css);

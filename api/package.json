@@ -1,4 +1,5 @@
 {
+  "name": "api",
   "type": "module",
   "scripts": {
     "start": "node ./src/main.mjs",

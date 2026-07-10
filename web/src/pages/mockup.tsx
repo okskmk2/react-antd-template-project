@@ -1,5 +1,10 @@
 import { TableProps } from "antd";
 import { Link } from "react-router";
+import {
+  createCheckboxColumnFilter,
+  createDateRangeColumnFilter,
+  createSearchColumnFilter,
+} from "../components/columnFilters";
 
 export type MockRow = {
   key: string;
@@ -7,31 +12,8 @@ export type MockRow = {
   category: string;
   owner: string;
   status: "Active" | "Draft" | "Archived";
+  createdAt: string;
 };
-
-export const columns: TableProps<MockRow>["columns"] = [
-  {
-    title: "이름",
-    dataIndex: "name",
-    key: "name",
-    render: (value) => <Link to="/prototype-detail-page">{value}</Link>,
-  },
-  {
-    title: "카테고리",
-    dataIndex: "category",
-    key: "category",
-  },
-  {
-    title: "담당자",
-    dataIndex: "owner",
-    key: "owner",
-  },
-  {
-    title: "상태",
-    dataIndex: "status",
-    key: "status",
-  },
-];
 
 export const dataSource: MockRow[] = [
   {
@@ -40,6 +22,7 @@ export const dataSource: MockRow[] = [
     category: "UI/UX",
     owner: "김지훈",
     status: "Active",
+    createdAt: "2025-01-06",
   },
   {
     key: "2",
@@ -47,6 +30,7 @@ export const dataSource: MockRow[] = [
     category: "정책",
     owner: "박서연",
     status: "Draft",
+    createdAt: "2025-01-14",
   },
   {
     key: "3",
@@ -54,6 +38,7 @@ export const dataSource: MockRow[] = [
     category: "백오피스",
     owner: "이도윤",
     status: "Archived",
+    createdAt: "2025-01-22",
   },
   {
     key: "4",
@@ -61,6 +46,7 @@ export const dataSource: MockRow[] = [
     category: "운영",
     owner: "최민아",
     status: "Active",
+    createdAt: "2025-02-03",
   },
   {
     key: "5",
@@ -68,6 +54,7 @@ export const dataSource: MockRow[] = [
     category: "인프라",
     owner: "정현우",
     status: "Draft",
+    createdAt: "2025-02-11",
   },
   {
     key: "6",
@@ -75,6 +62,7 @@ export const dataSource: MockRow[] = [
     category: "UI/UX",
     owner: "한예린",
     status: "Active",
+    createdAt: "2025-02-19",
   },
   {
     key: "7",
@@ -82,6 +70,7 @@ export const dataSource: MockRow[] = [
     category: "정책",
     owner: "윤서준",
     status: "Draft",
+    createdAt: "2025-03-02",
   },
   {
     key: "8",
@@ -89,6 +78,7 @@ export const dataSource: MockRow[] = [
     category: "백오피스",
     owner: "장하민",
     status: "Active",
+    createdAt: "2025-03-10",
   },
   {
     key: "9",
@@ -96,6 +86,7 @@ export const dataSource: MockRow[] = [
     category: "운영",
     owner: "송지안",
     status: "Archived",
+    createdAt: "2025-03-18",
   },
   {
     key: "10",
@@ -103,6 +94,7 @@ export const dataSource: MockRow[] = [
     category: "인프라",
     owner: "문태윤",
     status: "Active",
+    createdAt: "2025-03-26",
   },
   {
     key: "11",
@@ -110,6 +102,7 @@ export const dataSource: MockRow[] = [
     category: "정책",
     owner: "오하윤",
     status: "Draft",
+    createdAt: "2025-04-03",
   },
   {
     key: "12",
@@ -117,6 +110,7 @@ export const dataSource: MockRow[] = [
     category: "백오피스",
     owner: "임도현",
     status: "Active",
+    createdAt: "2025-04-11",
   },
   {
     key: "13",
@@ -124,6 +118,7 @@ export const dataSource: MockRow[] = [
     category: "UI/UX",
     owner: "배수빈",
     status: "Archived",
+    createdAt: "2025-04-19",
   },
   {
     key: "14",
@@ -131,6 +126,7 @@ export const dataSource: MockRow[] = [
     category: "인프라",
     owner: "조시우",
     status: "Active",
+    createdAt: "2025-04-27",
   },
   {
     key: "15",
@@ -138,6 +134,7 @@ export const dataSource: MockRow[] = [
     category: "운영",
     owner: "차유진",
     status: "Draft",
+    createdAt: "2025-05-05",
   },
   {
     key: "16",
@@ -145,6 +142,7 @@ export const dataSource: MockRow[] = [
     category: "정책",
     owner: "서민재",
     status: "Active",
+    createdAt: "2025-05-13",
   },
   {
     key: "17",
@@ -152,6 +150,7 @@ export const dataSource: MockRow[] = [
     category: "백오피스",
     owner: "강지민",
     status: "Archived",
+    createdAt: "2025-05-21",
   },
   {
     key: "18",
@@ -159,6 +158,7 @@ export const dataSource: MockRow[] = [
     category: "UI/UX",
     owner: "홍예준",
     status: "Active",
+    createdAt: "2025-05-29",
   },
   {
     key: "19",
@@ -166,6 +166,7 @@ export const dataSource: MockRow[] = [
     category: "운영",
     owner: "신유나",
     status: "Draft",
+    createdAt: "2025-06-06",
   },
   {
     key: "20",
@@ -173,5 +174,52 @@ export const dataSource: MockRow[] = [
     category: "인프라",
     owner: "권도율",
     status: "Active",
+    createdAt: "2025-06-14",
+  },
+];
+
+const categoryFilters = Array.from(
+  new Set(dataSource.map((row) => row.category))
+).map((value) => ({ text: value, value }));
+
+const statusFilters = Array.from(new Set(dataSource.map((row) => row.status))).map(
+  (value) => ({ text: value, value })
+);
+
+export const columns: TableProps<MockRow>["columns"] = [
+  {
+    title: "이름",
+    dataIndex: "name",
+    key: "name",
+    render: (value) => <Link to="/prototype-detail-page">{value}</Link>,
+    ...createSearchColumnFilter<MockRow>("이름"),
+  },
+  {
+    title: "카테고리",
+    dataIndex: "category",
+    key: "category",
+    sorter: (a, b) => a.category.localeCompare(b.category),
+    ...createCheckboxColumnFilter<MockRow>(categoryFilters),
+  },
+  {
+    title: "담당자",
+    dataIndex: "owner",
+    key: "owner",
+    sorter: (a, b) => a.owner.localeCompare(b.owner),
+    ...createSearchColumnFilter<MockRow>("담당자"),
+  },
+  {
+    title: "상태",
+    dataIndex: "status",
+    key: "status",
+    sorter: (a, b) => a.status.localeCompare(b.status),
+    ...createCheckboxColumnFilter<MockRow>(statusFilters),
+  },
+  {
+    title: "등록일",
+    dataIndex: "createdAt",
+    key: "createdAt",
+    sorter: (a, b) => a.createdAt.localeCompare(b.createdAt),
+    ...createDateRangeColumnFilter<MockRow>("등록일"),
   },
 ];

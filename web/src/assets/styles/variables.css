@@ -1,4 +1,5 @@
 :root {
   --app-padding: 24px;
-  --layout-border: 1px solid #ccc;
+  --border-color: #e5e5e5;
+  --layout-border: 1px solid var(--border-color);
 }

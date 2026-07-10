@@ -11,33 +11,23 @@
   flex-grow: 1;
 }
 
+.SnbSearch {
+  padding: 0 var(--app-padding) 12px;
+}
+
+.SnbEmptyState {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--app-padding);
+  color: rgba(0, 0, 0, 0.45);
+  font-size: 13px;
+}
+
 .DefaultLayout {
   display: flex;
   height: 100vh;
-}
-
-.PageComponent {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.PageTitle {
-  font-weight: 500;
-  font-size: 18px;
-}
-
-.PageHeader {
-  min-height: 70px;
-  border-bottom: var(--layout-border);
-  padding: 16px var(--app-padding);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.PageContent {
-  padding: var(--app-padding);
 }
 
 .SnbHeader {
@@ -50,18 +40,73 @@
 
 .DetailColumns {
   display: flex;
-  gap: 24px;
+  gap: 20px;
 }
 
 .DetailColumns > div {
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
 .DetailColumns > div:first-child {
-  flex-grow: 1;
+  flex-basis: 49rem;
 }
 .DetailColumns > div:last-child {
-  flex-basis: 30%;
+  flex-basis: 17rem;
+}
+
+.FilterArea {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.FilterChips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.FilterChip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px 4px 10px;
+  border: var(--layout-border);
+  border-radius: 6px;
+}
+
+.FilterChipLabel {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.45);
+  white-space: nowrap;
+}
+
+.FilterChipRemove {
+  padding: 0 4px;
+}
+
+.InfoList {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.InfoItem {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.InfoLabel {
+  font-size: 13px;
+  color: #656565;
+}
+
+.InfoValue {
+  font-size: 16px;
 }

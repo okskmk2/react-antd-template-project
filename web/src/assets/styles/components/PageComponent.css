@@ -1,0 +1,31 @@
+.PageComponent {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.PageTitleArea {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.PageTitle {
+  font-weight: 700;
+  font-size: 23px;
+}
+
+.PageHeader {
+  min-height: 70px;
+  border-bottom: var(--layout-border);
+  padding: 16px var(--app-padding);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.PageContent {
+  padding: 32px;
+  background-color: #f5f6f8;
+  flex-grow: 1;
+}

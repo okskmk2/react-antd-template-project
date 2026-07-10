@@ -10,6 +10,8 @@ import ServiceUnavailablePage from "./pages/error/ServiceUnavailablePage";
 import PrototypeListPage from "./pages/PrototypeListPage";
 import PrototypeDetailPage from "./pages/PrototypeDetailPage";
 import StatisticsPage from "./pages/StatisticsPage";
+import PermissionManagementListPage from "./pages/PermissionManagementListPage";
+import PermissionManagementEditPage from "./pages/PermissionManagementEditPage";
 
 const routes: RouteObject[] = [
   {
@@ -31,6 +33,18 @@ const routes: RouteObject[] = [
       {
         path: "/statistics-page",
         Component: StatisticsPage,
+      },
+      {
+        path: "/account/permission",
+        Component: PermissionManagementListPage,
+      },
+      {
+        path: "/account/permission/register",
+        Component: PermissionManagementEditPage,
+      },
+      {
+        path: "/account/permission/edit",
+        Component: PermissionManagementEditPage,
       },
     ],
   },

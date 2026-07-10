@@ -1,90 +1,9 @@
-import { Menu, Tag, type MenuProps } from "antd";
-import { Link } from "react-router";
+import { Input, Menu, Tag, type MenuProps } from "antd";
+import { useEffect, useMemo, useState } from "react";
+import { Link, useLocation } from "react-router";
+import { sourceMenuGroups, type RawMenuGroup } from "./snbMenuData";
 
 type MenuItem = Required<MenuProps>["items"][number];
-
-const items: MenuItem[] = [
-  {
-    key: "test",
-    label: "통계",
-    children: [
-      {
-        key: "statistics-page",
-        label: <Link to={"/statistics-page"}>통계</Link>,
-      },
-    ],
-  },
-  {
-    key: "test1",
-    label: "Test",
-    children: [
-      {
-        key: "prototype-list-page1",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-      {
-        key: "prototype-list-page2",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-      {
-        key: "prototype-list-page3",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-      {
-        key: "prototype-list-page4",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-      {
-        key: "prototype-list-page5",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-      {
-        key: "prototype-list-page6",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-      {
-        key: "prototype-list-page7",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-      {
-        key: "prototype-list-page8",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-      {
-        key: "prototype-list-page9",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-      {
-        key: "prototype-list-page10",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-      {
-        key: "prototype-list-page11",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-      {
-        key: "prototype-list-page12",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-      {
-        key: "prototype-list-page13",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-      {
-        key: "prototype-list-page14",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-      {
-        key: "prototype-list-page15",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-      {
-        key: "prototype-list-page16",
-        label: <Link to={"prototype-list-page"}>Prototype List Page</Link>,
-      },
-    ],
-  },
-];
 
 //    <Space>
 //         <Button onClick={() => callModal("Button clicked!")}>모달</Button>
@@ -110,17 +29,103 @@ const items: MenuItem[] = [
 //       </Space>
 
 export default function Snb() {
+  const location = useLocation();
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
+
+  const normalizedKeyword = searchKeyword.trim().toLowerCase();
+
+  const filteredGroups = useMemo(() => {
+    if (!normalizedKeyword) {
+      return sourceMenuGroups;
+    }
+
+    return sourceMenuGroups
+      .map((group) => {
+        const groupMatched = group.label.toLowerCase().includes(normalizedKeyword);
+
+        if (groupMatched) {
+          return group;
+        }
+
+        const matchedChildren = group.children.filter((child) =>
+          child.label.toLowerCase().includes(normalizedKeyword),
+        );
+
+        if (!matchedChildren.length) {
+          return null;
+        }
+
+        return {
+          ...group,
+          children: matchedChildren,
+        };
+      })
+      .filter((group): group is RawMenuGroup => group !== null);
+  }, [normalizedKeyword]);
+
+  useEffect(() => {
+    if (normalizedKeyword) {
+      setOpenKeys(filteredGroups.map((group) => group.key));
+    }
+  }, [filteredGroups, normalizedKeyword]);
+
+  const selectedKeys = useMemo(() => {
+    const currentPathWithSearch = `${location.pathname}${location.search}`;
+
+    const selectedChild = sourceMenuGroups
+      .flatMap((group) => group.children)
+      .find(
+        (child) =>
+          child.path === currentPathWithSearch || child.path === location.pathname,
+      );
+
+    return selectedChild ? [selectedChild.key] : [];
+  }, [location.pathname, location.search]);
+
+  const menuItems: MenuItem[] = useMemo(
+    () =>
+      filteredGroups.map((group) => ({
+        key: group.key,
+        label: group.label,
+        children: group.children.map((child) => ({
+          key: child.key,
+          label: <Link to={child.path}>{child.label}</Link>,
+        })),
+      })),
+    [filteredGroups],
+  );
+
   return (
     <div className="Snb">
       <div className="SnbHeader">
         BrandName <div>Admin Console</div>
       </div>
-      <Menu
-        mode="inline"
-        items={items}
-        theme="light"
-        className="SnbMenu scrollbar"
-      />
+      <div className="SnbSearch">
+        <Input
+          allowClear
+          placeholder="메뉴 검색"
+          value={searchKeyword}
+          onChange={(event) => setSearchKeyword(event.target.value)}
+        />
+      </div>
+      {menuItems.length ? (
+        <Menu
+          mode="inline"
+          items={menuItems}
+          theme="light"
+          className="SnbMenu scrollbar"
+          selectedKeys={selectedKeys}
+          openKeys={openKeys}
+          onOpenChange={(keys) => {
+            if (!normalizedKeyword) {
+              setOpenKeys(keys as string[]);
+            }
+          }}
+        />
+      ) : (
+        <div className="SnbEmptyState">검색 결과가 없습니다.</div>
+      )}
       <div className="SnbFooter">
         <span>UserName</span>
         <Tag>RoleName</Tag>
