@@ -11,8 +11,8 @@
 }
 
 .PageTitle {
-  font-weight: 700;
-  font-size: 23px;
+  font-weight: 500;
+  font-size: 22px;
 }
 
 .PageHeader {
@@ -26,6 +26,6 @@
 
 .PageContent {
   padding: 32px;
-  background-color: #f5f6f8;
+  background-color: #f0f4f9;
   flex-grow: 1;
 }

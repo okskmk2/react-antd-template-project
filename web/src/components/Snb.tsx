@@ -42,7 +42,9 @@ export default function Snb() {
 
     return sourceMenuGroups
       .map((group) => {
-        const groupMatched = group.label.toLowerCase().includes(normalizedKeyword);
+        const groupMatched = group.label
+          .toLowerCase()
+          .includes(normalizedKeyword);
 
         if (groupMatched) {
           return group;
@@ -77,7 +79,8 @@ export default function Snb() {
       .flatMap((group) => group.children)
       .find(
         (child) =>
-          child.path === currentPathWithSearch || child.path === location.pathname,
+          child.path === currentPathWithSearch ||
+          child.path === location.pathname,
       );
 
     return selectedChild ? [selectedChild.key] : [];
@@ -99,7 +102,8 @@ export default function Snb() {
   return (
     <div className="Snb">
       <div className="SnbHeader">
-        BrandName <div>Admin Console</div>
+        <div className="Snb_brandName">BrandName</div>
+        <div className="Snb__subtitle">Admin Console</div>
       </div>
       <div className="SnbSearch">
         <Input

@@ -110,3 +110,15 @@
 .InfoValue {
   font-size: 16px;
 }
+
+.Snb_brandName {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.Snb__subtitle {
+  margin-top: 4px;
+  font-size: 14px;
+  color: #777;
+  margin-left: 2px;
+}
